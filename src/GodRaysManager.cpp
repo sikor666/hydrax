@@ -1,7 +1,7 @@
 /*
 --------------------------------------------------------------------------------
 This source file is part of sssHydrax.
-sssHydrax is a modified version of Hydrax (Copyright (C) 2008 Xavier Verguín González)
+sssHydrax is a modified version of Hydrax (Copyright (C) 2008 Xavier Verguï¿½n Gonzï¿½lez)
 to adapt it to SonSilentSea.
 
 This program is free software; you can redistribute it and/or modify it under
@@ -18,7 +18,7 @@ this program; if not, write to the Free Software Foundation, Inc., 59 Temple
 Place - Suite 330, Boston, MA 02111-1307, USA, or go to
 http://www.gnu.org/copyleft/lesser.txt.
 
-Author: Jose Luis Cercós Pita
+Author: Jose Luis Cercï¿½s Pita
 --------------------------------------------------------------------------------
 */
 

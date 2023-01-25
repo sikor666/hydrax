@@ -131,7 +131,7 @@ namespace Hydrax
 		mManualGodRays->setDynamic(true);
 		mManualGodRays->setVisible(mHydrax->_isCurrentFrameUnderwater());
 
-		mManualGodRays->begin(_def_GodRays_Material_Name, Ogre::RenderOperation::OT_TRIANGLE_LIST);
+		mManualGodRays->begin(_def_GodRays_Material_Name, Ogre::RenderOperation::OT_TRIANGLE_LIST, HYDRAX_RESOURCE_GROUP);
 		mManualGodRays->setRenderQueueGroup(Ogre::RENDER_QUEUE_9+1);
 
 		for(int k = 0; k < mNumberOfRays; k++)
@@ -161,24 +161,24 @@ namespace Hydrax
 		mHydrax->getSceneManager()->destroyManualObject(mManualGodRays);
 		mManualGodRays = nullptr;
 
-		if (Ogre::MaterialManager::getSingleton().resourceExists(_def_GodRays_Material_Name))
+		if (Ogre::MaterialManager::getSingleton().resourceExists(_def_GodRays_Material_Name, HYDRAX_RESOURCE_GROUP))
 		{
-			Ogre::MaterialManager::getSingleton().remove(_def_GodRays_Material_Name);
+			Ogre::MaterialManager::getSingleton().remove(_def_GodRays_Material_Name, HYDRAX_RESOURCE_GROUP);
 
-			Ogre::HighLevelGpuProgramManager::getSingleton().unload(_def_GodRays_Shader_VP_Name);
-		    Ogre::HighLevelGpuProgramManager::getSingleton().unload(_def_GodRays_Shader_FP_Name);
-			Ogre::HighLevelGpuProgramManager::getSingleton().remove(_def_GodRays_Shader_VP_Name);
-		    Ogre::HighLevelGpuProgramManager::getSingleton().remove(_def_GodRays_Shader_FP_Name);
+			Ogre::HighLevelGpuProgramManager::getSingleton().unload(_def_GodRays_Shader_VP_Name, HYDRAX_RESOURCE_GROUP);
+		    Ogre::HighLevelGpuProgramManager::getSingleton().unload(_def_GodRays_Shader_FP_Name, HYDRAX_RESOURCE_GROUP);
+			Ogre::HighLevelGpuProgramManager::getSingleton().remove(_def_GodRays_Shader_VP_Name, HYDRAX_RESOURCE_GROUP);
+		    Ogre::HighLevelGpuProgramManager::getSingleton().remove(_def_GodRays_Shader_FP_Name, HYDRAX_RESOURCE_GROUP);
 		}
 
-		if (Ogre::MaterialManager::getSingleton().resourceExists(_def_GodRaysDepth_Material_Name))
+		if (Ogre::MaterialManager::getSingleton().resourceExists(_def_GodRaysDepth_Material_Name, HYDRAX_RESOURCE_GROUP))
 		{
-			Ogre::MaterialManager::getSingleton().remove(_def_GodRaysDepth_Material_Name);
+			Ogre::MaterialManager::getSingleton().remove(_def_GodRaysDepth_Material_Name, HYDRAX_RESOURCE_GROUP);
 
-			Ogre::HighLevelGpuProgramManager::getSingleton().unload(_def_GodRaysDepth_Shader_VP_Name);
-		    Ogre::HighLevelGpuProgramManager::getSingleton().unload(_def_GodRaysDepth_Shader_FP_Name);
-			Ogre::HighLevelGpuProgramManager::getSingleton().remove(_def_GodRaysDepth_Shader_VP_Name);
-		    Ogre::HighLevelGpuProgramManager::getSingleton().remove(_def_GodRaysDepth_Shader_FP_Name);
+			Ogre::HighLevelGpuProgramManager::getSingleton().unload(_def_GodRaysDepth_Shader_VP_Name, HYDRAX_RESOURCE_GROUP);
+		    Ogre::HighLevelGpuProgramManager::getSingleton().unload(_def_GodRaysDepth_Shader_FP_Name, HYDRAX_RESOURCE_GROUP);
+			Ogre::HighLevelGpuProgramManager::getSingleton().remove(_def_GodRaysDepth_Shader_VP_Name, HYDRAX_RESOURCE_GROUP);
+		    Ogre::HighLevelGpuProgramManager::getSingleton().remove(_def_GodRaysDepth_Shader_FP_Name, HYDRAX_RESOURCE_GROUP);
 		}
 
 		for (int k = 0; k < 2; k++)
@@ -192,7 +192,7 @@ namespace Hydrax
             RT->removeAllListeners();
             RT->removeAllViewports();
 
-			Ogre::TextureManager::getSingleton().remove(mProjectorRTT->getName());
+			Ogre::TextureManager::getSingleton().remove(mProjectorRTT->getName(), HYDRAX_RESOURCE_GROUP);
 			mProjectorRTT.setNull();
 		}
 
@@ -785,7 +785,7 @@ namespace Hydrax
 
 	void GodRaysManager::addDepthTechnique(Ogre::Technique *Technique, const bool& AutoUpdate)
 	{
-		if (!Ogre::MaterialManager::getSingleton().resourceExists(_def_GodRaysDepth_Material_Name))
+		if (!Ogre::MaterialManager::getSingleton().resourceExists(_def_GodRaysDepth_Material_Name, HYDRAX_RESOURCE_GROUP))
 		{
 			HydraxLOG("GodRaysManager::addDepthTechnique(...) Objects intersection must be enabled and Hydrax::create() already called, skipping...");
 

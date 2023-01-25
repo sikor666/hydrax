@@ -67,19 +67,19 @@ namespace Hydrax
 
 		for (unsigned int k = 0; k < mTextures.size(); k++)
 		{
-			Ogre::TextureManager::getSingleton().remove(mTextures.at(k)->getName());
+			Ogre::TextureManager::getSingleton().remove(mTextures.at(k)->getName(), HYDRAX_RESOURCE_GROUP);
 		}
 
 		mTextures.clear();
 
 		mRttManager->remove(RttManager::RTT_GPU_NORMAL_MAP);
 
-		Ogre::HighLevelGpuProgramManager::getSingleton().unload(mNormalMapMaterial->getTechnique(0)->getPass(0)->getVertexProgramName());
-        Ogre::HighLevelGpuProgramManager::getSingleton().unload(mNormalMapMaterial->getTechnique(0)->getPass(0)->getFragmentProgramName());
-		Ogre::HighLevelGpuProgramManager::getSingleton().remove(mNormalMapMaterial->getTechnique(0)->getPass(0)->getVertexProgramName());
-        Ogre::HighLevelGpuProgramManager::getSingleton().remove(mNormalMapMaterial->getTechnique(0)->getPass(0)->getFragmentProgramName());
+		Ogre::HighLevelGpuProgramManager::getSingleton().unload(mNormalMapMaterial->getTechnique(0)->getPass(0)->getVertexProgramName(), HYDRAX_RESOURCE_GROUP);
+        Ogre::HighLevelGpuProgramManager::getSingleton().unload(mNormalMapMaterial->getTechnique(0)->getPass(0)->getFragmentProgramName(), HYDRAX_RESOURCE_GROUP);
+		Ogre::HighLevelGpuProgramManager::getSingleton().remove(mNormalMapMaterial->getTechnique(0)->getPass(0)->getVertexProgramName(), HYDRAX_RESOURCE_GROUP);
+        Ogre::HighLevelGpuProgramManager::getSingleton().remove(mNormalMapMaterial->getTechnique(0)->getPass(0)->getFragmentProgramName(), HYDRAX_RESOURCE_GROUP);
 
-		Ogre::MaterialManager::getSingleton().remove(mNormalMapMaterial->getName());
+		Ogre::MaterialManager::getSingleton().remove(mNormalMapMaterial->getName(), HYDRAX_RESOURCE_GROUP);
 		mNormalMapMaterial.setNull();
 		
 		mCreated = false;

@@ -140,8 +140,8 @@ namespace Hydrax
             RT->removeAllListeners();
             RT->removeAllViewports();
 
-			Ogre::TextureManager::getSingleton().remove(mRttOptions[Rtt].Name);
-			Ogre::MeshManager::getSingleton().remove(mRttOptions[Rtt].Name + "ClipPlane");
+			Ogre::TextureManager::getSingleton().remove(mRttOptions[Rtt].Name, HYDRAX_RESOURCE_GROUP);
+			Ogre::MeshManager::getSingleton().remove(mRttOptions[Rtt].Name + "ClipPlane", HYDRAX_RESOURCE_GROUP);
 
 			Tex.setNull();
 			delete mPlanes[Rtt];
@@ -149,9 +149,9 @@ namespace Hydrax
 		}
 
 		// Check it to avoid any possible problem(texture initializated by createTextureUnit(Name..))
-		if (Ogre::TextureManager::getSingleton().resourceExists(mRttOptions[Rtt].Name))
+		if (Ogre::TextureManager::getSingleton().resourceExists(mRttOptions[Rtt].Name, HYDRAX_RESOURCE_GROUP))
 		{
-			Ogre::TextureManager::getSingleton().remove(mRttOptions[Rtt].Name);
+			Ogre::TextureManager::getSingleton().remove(mRttOptions[Rtt].Name, HYDRAX_RESOURCE_GROUP);
 		}
 	}
 
@@ -641,7 +641,7 @@ namespace Hydrax
 
 			for(k = 0; k < CurrentEntity->getNumSubEntities(); k++)
 			{
-				SubEntMat = Ogre::MaterialManager::getSingleton().getByName(CurrentEntity->getSubEntity(k)->getMaterialName());
+				SubEntMat = Ogre::MaterialManager::getSingleton().getByName(CurrentEntity->getSubEntity(k)->getMaterialName(), HYDRAX_RESOURCE_GROUP);
 
 				if (!SubEntMat.isNull())
 				{
@@ -781,7 +781,7 @@ namespace Hydrax
 
 			for(k = 0; k < CurrentEntity->getNumSubEntities(); k++)
 			{
-				SubEntMat = Ogre::MaterialManager::getSingleton().getByName(CurrentEntity->getSubEntity(k)->getMaterialName());
+				SubEntMat = Ogre::MaterialManager::getSingleton().getByName(CurrentEntity->getSubEntity(k)->getMaterialName(), HYDRAX_RESOURCE_GROUP);
 
 				if (!SubEntMat.isNull())
 				{

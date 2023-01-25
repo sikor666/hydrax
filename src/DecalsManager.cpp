@@ -56,7 +56,8 @@ namespace Hydrax
 	{
 		unregister();
 	
-		mSceneNode->getParentSceneNode()->removeAndDestroyChild(mSceneNode->getName());
+		mSceneNode->getParentSceneNode()->removeAndDestroyChild(mSceneNode);
+		mSceneNode = nullptr;
 
 		delete mProjector;
 	}
@@ -85,7 +86,7 @@ namespace Hydrax
 		if (mRegisteredPass)
 		{
 			mRegisteredPass->getParent()->removePass(mRegisteredPass->getIndex());
-			mRegisteredPass = static_cast<Ogre::Pass*>(NULL);
+			mRegisteredPass = nullptr;
 		}
 	}
 
@@ -273,7 +274,7 @@ namespace Hydrax
             }
 		}
 
-		return static_cast<Decal*>(NULL);
+		return nullptr;
 	}
 
 	void DecalsManager::remove(const int& Id)

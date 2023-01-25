@@ -56,8 +56,8 @@ namespace Hydrax
 		}
 
 		mSceneNode->detachAllObjects();
-		mSceneNode->getParentSceneNode()->removeAndDestroyChild(mSceneNode->getName());
-		mSceneNode = 0;
+		mSceneNode->getParentSceneNode()->removeAndDestroyChild(mSceneNode);
+		mSceneNode = nullptr;
 
 		Ogre::MeshManager::getSingleton().remove("HydraxMesh");
 		mHydrax->getSceneManager()->destroyEntity(mEntity);

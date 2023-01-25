@@ -156,10 +156,10 @@ namespace Hydrax
 		}
 
 		delete mPerlin;
-		mPerlin = static_cast<Noise::Perlin*>(NULL);
+		mPerlin = nullptr;
 
 		mHydrax->getSceneManager()->destroyManualObject(mManualGodRays);
-		mManualGodRays = static_cast<Ogre::ManualObject*>(NULL);
+		mManualGodRays = nullptr;
 
 		if (Ogre::MaterialManager::getSingleton().resourceExists(_def_GodRays_Material_Name))
 		{
@@ -197,11 +197,11 @@ namespace Hydrax
 		}
 
 		mHydrax->getSceneManager()->destroyCamera(mProjectorCamera);
-		mProjectorCamera = static_cast<Ogre::Camera*>(NULL);
+		mProjectorCamera = nullptr;
 
 		mProjectorSN->detachAllObjects();
-		mProjectorSN->getParentSceneNode()->removeAndDestroyChild(mProjectorSN->getName());
-		mProjectorSN = static_cast<Ogre::SceneNode*>(NULL);
+		mProjectorSN->getParentSceneNode()->removeAndDestroyChild(mProjectorSN);
+		mProjectorSN = nullptr;
 
 		mCreated = false;
 	}
@@ -342,7 +342,7 @@ namespace Hydrax
 		mProjectorSN->detachObject(mManualGodRays);
 
 		mHydrax->getSceneManager()->destroyManualObject(mManualGodRays);
-		mManualGodRays = static_cast<Ogre::ManualObject*>(NULL);
+		mManualGodRays = nullptr;
 
 		_createGodRays();
 	}

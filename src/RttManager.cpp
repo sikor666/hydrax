@@ -53,7 +53,7 @@ namespace Hydrax
 
 		for (int k = 0; k < 6; k++)
 		{
-			mPlanes[k] = static_cast<Ogre::MovablePlane*>(NULL);
+			mPlanes[k] = nullptr;
 			mTextures[k].setNull();
 			mRttOptions[k].Name  = RttNames[k];
 			mRttOptions[k].Size_ = Size(0);
@@ -145,7 +145,7 @@ namespace Hydrax
 
 			Tex.setNull();
 			delete mPlanes[Rtt];
-			mPlanes[Rtt] = static_cast<Ogre::MovablePlane*>(NULL);
+			mPlanes[Rtt] = nullptr;
 		}
 
 		// Check it to avoid any possible problem(texture initializated by createTextureUnit(Name..))
@@ -165,8 +165,8 @@ namespace Hydrax
 	    if (mPlanesSceneNode)
 		{
 			mPlanesSceneNode->detachAllObjects();
-            mPlanesSceneNode->getParentSceneNode()->removeAndDestroyChild(mPlanesSceneNode->getName());
-			mPlanesSceneNode = 0;
+            mPlanesSceneNode->getParentSceneNode()->removeAndDestroyChild(mPlanesSceneNode);
+			mPlanesSceneNode = nullptr;
 			mHydrax->getSceneManager()->removeRenderQueueListener(&mReflectionListener.mCReflectionQueueListener);
 		}
 	}

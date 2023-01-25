@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.12)
 
 set(PROJ "Hydrax")
 
@@ -12,10 +12,10 @@ message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
 
 find_package(OGRE REQUIRED)
 
-set(${PROJ}_INCLUDE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/include"})
+set(${PROJ}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 set(INCLUDE_DIRS
-        ${OGRE_INCLUDE_DIR}
+        ${OGRE_INCLUDE_DIRS}
         ${${PROJ}_INCLUDE_DIR})
 
 if((${OGRE_VERSION} VERSION_EQUAL "1.9.0") OR (${OGRE_VERSION} VERSION_GREATER "1.9.0"))

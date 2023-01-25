@@ -94,6 +94,8 @@ set(${PROJ}_LIB "${PROJ}")
 
 add_library(${${PROJ}_LIB} ${SOURCES_${PROJ}_BASE} ${SOURCES_${PROJ}_MODULES} ${SOURCES_${PROJ}_NOISE})
 
+target_include_directories(${${PROJ}_LIB} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+
 set(INCLUDE_INSTALL_DIR include/${PROJ})
 
 install(TARGETS ${${PROJ}_LIB}

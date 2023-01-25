@@ -411,7 +411,7 @@ namespace Hydrax
 
 		if (mCreated)
 		{
-            #if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+            #if OGRE_MIN_VERSION(1, 8, 0)
                 mWorldMatrix = mEntity->getParentSceneNode()->_getFullTransform();
             #else
                 mEntity->getParentSceneNode()->getWorldTransforms(&mWorldMatrix);
@@ -422,7 +422,7 @@ namespace Hydrax
 			Ogre::SceneNode *mTmpSN = new Ogre::SceneNode(0);
 		    mTmpSN->setPosition(mHydrax->getPosition());
 
-            #if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+            #if OGRE_MIN_VERSION(1, 8, 0)
                 mWorldMatrix = mTmpSN->_getFullTransform();
             #else
                 mTmpSN->getWorldTransforms(&mWorldMatrix);
@@ -431,7 +431,7 @@ namespace Hydrax
 		    delete mTmpSN;
 		}
 
-		return mWorldMatrix.inverseAffine().transformAffine(WorldSpacePosition);
+		return mWorldMatrix.inverse() * WorldSpacePosition;
 	}
 
 	const Ogre::Vector3 Mesh::getWorldSpacePosition(const Ogre::Vector3& ObjectSpacePosition) const
@@ -440,7 +440,7 @@ namespace Hydrax
 
 		if (mCreated)
 		{
-            #if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+            #if OGRE_MIN_VERSION(1, 8, 0)
                 mWorldMatrix = mEntity->getParentSceneNode()->_getFullTransform();
             #else
                 mEntity->getParentSceneNode()->getWorldTransforms(&mWorldMatrix);
@@ -451,7 +451,7 @@ namespace Hydrax
 			Ogre::SceneNode *mTmpSN = new Ogre::SceneNode(0);
 		    mTmpSN->setPosition(mHydrax->getPosition());
 
-            #if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+            #if OGRE_MIN_VERSION(1, 8, 0)
                 mWorldMatrix = mTmpSN->_getFullTransform();
             #else
                 mTmpSN->getWorldTransforms(&mWorldMatrix);
@@ -460,6 +460,6 @@ namespace Hydrax
 		    delete mTmpSN;
 		}
 
-		return mWorldMatrix.transformAffine(ObjectSpacePosition);
+		return mWorldMatrix * ObjectSpacePosition;
 	}
 }

@@ -377,7 +377,7 @@ namespace Hydrax{namespace Noise
 		
 		const Ogre::PixelBox& PixelBox = PixelBuffer->getCurrentLock();
 
-		Data = static_cast<unsigned short*>(PixelBox.data);
+		Data = reinterpret_cast<unsigned short*>(PixelBox.data);
 
 		for (int u = 0; u < resolution*resolution; u++)
 		{

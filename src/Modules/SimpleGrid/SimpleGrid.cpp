@@ -304,7 +304,7 @@ namespace Hydrax{namespace Module
 			// RTT normals calculation needs world-space coords
 			Ogre::Vector3 p = Ogre::Vector3(0,0,0);
 		    Ogre::Matrix4 mWorldMatrix;
-            #if OGRE_VERSION_MAJOR >= 1 && OGRE_VERSION_MINOR >= 7
+            #if OGRE_MIN_VERSION(1, 8, 0)
                 mWorldMatrix = mHydrax->getMesh()->getEntity()->getParentSceneNode()->_getFullTransform();
             #else
                 mHydrax->getMesh()->getEntity()->getParentSceneNode()->getWorldTransforms(&mWorldMatrix);
@@ -316,7 +316,7 @@ namespace Hydrax{namespace Module
 				p.z = Vertices[i].z;
 
 				// Calculate the world-space position
-				mWorldMatrix.transformAffine(p);
+				// mWorldMatrix.transformAffine(p);
 
 				Vertices[i].y = mNoise->getValue(p.x, p.z) * mOptions.Strength;
 			}

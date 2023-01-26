@@ -1,10 +1,8 @@
 cmake_minimum_required(VERSION 2.8.12)
 
-set(PROJ "Hydrax")
+project(Hydrax)
 
-option(${PROJ}_USE_BOOST "Use Boost (when Ogre compiled with Boost)" ON)
-
-project(${PROJ})
+option(HYDRAX_USE_BOOST "Use Boost (when Ogre compiled with Boost)" OFF)
 
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ ${CMAKE_MODULE_PATH})
 
@@ -12,11 +10,9 @@ message("CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}")
 
 find_package(OGRE REQUIRED)
 
-set(${PROJ}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(${PROJECT_NAME}_INCLUDE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-set(INCLUDE_DIRS
-        ${OGRE_INCLUDE_DIRS}
-        ${${PROJ}_INCLUDE_DIR})
+set(INCLUDE_DIRS ${OGRE_INCLUDE_DIRS} ${${PROJECT_NAME}_INCLUDE_DIR})
 
 if((${OGRE_VERSION} VERSION_EQUAL "1.9.0") OR (${OGRE_VERSION} VERSION_GREATER "1.9.0"))
 	list(APPEND INCLUDE_DIRS ${OGRE_Overlay_INCLUDE_DIR})
@@ -24,7 +20,7 @@ if((${OGRE_VERSION} VERSION_EQUAL "1.9.0") OR (${OGRE_VERSION} VERSION_GREATER "
 endif()
 message("OGRE_VER: ${OGRE_VERSION}")
 
-if(${PROJ}_USE_BOOST)
+if(HYDRAX_USE_BOOST)
         find_package(Boost REQUIRED)
         set(INCLUDE_DIRS ${INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
         if(NOT Boost_FOUND)
@@ -32,7 +28,7 @@ if(${PROJ}_USE_BOOST)
                 message("---------------------------------------------")
                 message("---- Seems that your system has not Boost.")
                 message("---- Set Boost_DIR variable to Boost root dir")
-                message("---- if Ogre built with Boost or uncheck ${PROJ}_USE_BOOST option.")
+                message("---- if Ogre built with Boost or uncheck HYDRAX_USE_BOOST option.")
                 message("---------------------------------------------")
                 message("")
         endif()
@@ -43,7 +39,7 @@ include_directories(${INCLUDE_DIRS})
 link_directories(${OGRE_LIB_DIR})
 
 
-set(SOURCES_${PROJ}_BASE
+set(SOURCES_${PROJECT_NAME}_BASE
     src/CfgFileManager.cpp
     src/DecalsManager.cpp
     src/Enums.cpp
@@ -58,13 +54,13 @@ set(SOURCES_${PROJ}_BASE
     src/RttManager.cpp
     src/TextureManager.cpp)
 
-set(SOURCES_${PROJ}_MODULES
+set(SOURCES_${PROJECT_NAME}_MODULES
     src/Modules/Module.cpp
     src/Modules/ProjectedGrid/ProjectedGrid.cpp
     src/Modules/RadialGrid/RadialGrid.cpp
     src/Modules/SimpleGrid/SimpleGrid.cpp)
 
-set(SOURCES_${PROJ}_NOISE
+set(SOURCES_${PROJECT_NAME}_NOISE
     src/Noise/Noise.cpp
     src/Noise/FFT/FFT.cpp
     src/Noise/Perlin/Perlin.cpp
@@ -73,7 +69,7 @@ set(SOURCES_${PROJ}_NOISE
     src/Noise/Real/Wave.cpp)
 
 
-set(HEADERS_${PROJ}
+set(HEADERS_${PROJECT_NAME}
     include/CfgFileManager.h
     include/DecalsManager.h
     include/Enums.h
@@ -90,19 +86,15 @@ set(HEADERS_${PROJ}
     include/Modules/Module.h
     include/Noise/Noise.h)
 
-set(${PROJ}_LIB "${PROJ}")
+add_library(${PROJECT_NAME} ${SOURCES_${PROJECT_NAME}_BASE} ${SOURCES_${PROJECT_NAME}_MODULES} ${SOURCES_${PROJECT_NAME}_NOISE})
 
-add_library(${${PROJ}_LIB} ${SOURCES_${PROJ}_BASE} ${SOURCES_${PROJ}_MODULES} ${SOURCES_${PROJ}_NOISE})
+target_include_directories(${PROJECT_NAME} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-target_include_directories(${${PROJ}_LIB} INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/include)
+set(INCLUDE_INSTALL_DIR include/${PROJECT_NAME})
 
-set(INCLUDE_INSTALL_DIR include/${PROJ})
-
-install(TARGETS ${${PROJ}_LIB}
+install(TARGETS ${PROJECT_NAME}
 	RUNTIME DESTINATION bin
 	LIBRARY DESTINATION lib
 	ARCHIVE DESTINATION lib)
 
-
-install(FILES ${HEADERS_${PROJ}} DESTINATION ${INCLUDE_INSTALL_DIR})
-
+install(FILES ${HEADERS_${PROJECT_NAME}} DESTINATION ${INCLUDE_INSTALL_DIR})

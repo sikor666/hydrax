@@ -39,7 +39,7 @@ namespace Hydrax
             , mVertexBuffer(0)
             , mIndexBuffer(0)
 			, mSceneNode(0)
-            , mMaterialName("_NULL_")
+            , mMaterialName("BaseWhiteNoLighting")
     {
     }
 
@@ -69,7 +69,7 @@ namespace Hydrax
 		mNumVertices = 0;
 		mVertexBuffer.setNull();
 		mIndexBuffer.setNull();
-		mMaterialName = "_NULL_";
+		mMaterialName = "BaseWhiteNoLighting";
 
 		mCreated = false;
 	}

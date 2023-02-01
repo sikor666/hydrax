@@ -863,53 +863,5 @@ namespace Hydrax
         RT_Texture_Viewport->setOverlaysEnabled(false);
         RT_Texture_Viewport->setSkiesEnabled(false);
 		RT_Texture_Viewport->setShadowsEnabled(false);
-		mDepthMapListener.mGodRaysManager = this;
-		RT_Texture->addListener(&mDepthMapListener);
-	}
-
-	void GodRaysManager::DepthMapListener::preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt)
-	{
-		Ogre::SceneManager::MovableObjectIterator EntityIterator = mGodRaysManager->mHydrax->getSceneManager()->getMovableObjectIterator("Entity");
-		Ogre::Entity * CurrentEntity = NULL;
-		unsigned int k = 0;
-
-		mMaterials.empty();
-
-		mGodRaysManager->mHydrax->getMesh()->getEntity()->setVisible(false);
-
-		while( EntityIterator.hasMoreElements() )
-		{
-			CurrentEntity = static_cast<Ogre::Entity *>(EntityIterator.peekNextValue());
-
-			for( k = 0; k < CurrentEntity->getNumSubEntities(); k++ )
-			{
-				mMaterials.push(CurrentEntity->getSubEntity(k)->getMaterialName());
-				CurrentEntity->getSubEntity(k)->setMaterialName(_def_GodRaysDepth_Material_Name);
-			}
-
-			EntityIterator.moveNext();
-		}
-	}
-
-	void GodRaysManager::DepthMapListener::postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt)
-	{
-		Ogre::SceneManager::MovableObjectIterator EntityIterator = mGodRaysManager->mHydrax->getSceneManager()->getMovableObjectIterator("Entity");
-		Ogre::Entity * CurrentEntity = NULL;
-		unsigned int k = 0;
-
-		mGodRaysManager->mHydrax->getMesh()->getEntity()->setVisible(true);
-
-		while( EntityIterator.hasMoreElements() )
-		{
-			CurrentEntity = static_cast<Ogre::Entity *>(EntityIterator.peekNextValue());
-
-			for( k = 0; k < CurrentEntity->getNumSubEntities(); k++ )
-			{
-				CurrentEntity->getSubEntity(k)->setMaterialName(mMaterials.front());
-				mMaterials.pop();
-			}
-
-			EntityIterator.moveNext();
-		}
 	}
 }

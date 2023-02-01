@@ -220,30 +220,6 @@ namespace Hydrax
 		}
 
 	private:
-		/** GodRaysManager::DepthMapListener class
-		 */
-		class DllExport DepthMapListener : public Ogre::RenderTargetListener
-		{
-		public:
-			/// God rays manager pointer
-			GodRaysManager* mGodRaysManager;
-
-			/// std::string to store entity's original materials name
-			std::queue<std::string> mMaterials;
-
-			/** Funtion that is called before the Rtt will render
-			    @param evt Ogre RenderTargetEvent
-			    @remarks We've to override it
-			 */
-			void preRenderTargetUpdate(const Ogre::RenderTargetEvent& evt);
-
-			/** Funtion that is called after the Rtt will render
-			    @param evt Ogre RenderTargetEvent
-			    @remarks We've to override it
-			 */
-			void postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt);
-		};
-
 		/** Calculate the current position of a ray
 		    @param RayNumber Number of the ray range[0,NumerOfRays]
 			@return Ray position range[-1,1]x[-1,1]
@@ -324,8 +300,6 @@ namespace Hydrax
 		/// For rays intersection with objects we use a depth map based technique
 		/// Depth RTT texture
 		Ogre::TexturePtr mProjectorRTT;
-		/// Depth RTT listener
-		DepthMapListener mDepthMapListener;
 
 		/// Hydrax parent pointer
 		Hydrax *mHydrax;

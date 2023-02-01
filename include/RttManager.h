@@ -377,9 +377,6 @@ namespace Hydrax
 			/// Rtt manager pointer
 			RttManager* mRttManager;
 
-			/// std::string to store entity's original materials name
-			std::queue<std::string> mMaterials;
-
 			/// Camera.y - Plane.y difference
 			Ogre::Real mCameraPlaneDiff;
 
@@ -403,9 +400,6 @@ namespace Hydrax
 		public:
 			/// Rtt manager pointer
 			RttManager* mRttManager;
-
-			/// std::string to store entity's original materials name
-			std::queue<std::string> mMaterials;
 
 			/// Camera.y - Plane.y difference
 			Ogre::Real mCameraPlaneDiff;

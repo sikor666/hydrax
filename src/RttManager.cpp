@@ -625,54 +625,6 @@ namespace Hydrax
     {
 		Hydrax *mHydrax = mRttManager->mHydrax;
 
-        Ogre::SceneManager::MovableObjectIterator EntityIterator =
-			mHydrax->getSceneManager()->getMovableObjectIterator("Entity");
-        Ogre::Entity* CurrentEntity;
-		unsigned int k;
-
-		Ogre::MaterialPtr SubEntMat;
-		bool DepthTechniquePresent = false;
-
-        mMaterials.empty();
-
-        while (EntityIterator.hasMoreElements())
-        {
-            CurrentEntity = static_cast<Ogre::Entity*>(EntityIterator.peekNextValue());
-
-			for(k = 0; k < CurrentEntity->getNumSubEntities(); k++)
-			{
-				SubEntMat = Ogre::MaterialManager::getSingleton().getByName(CurrentEntity->getSubEntity(k)->getMaterialName(), HYDRAX_RESOURCE_GROUP);
-
-				if (!SubEntMat.isNull())
-				{
-					Ogre::Material::TechniqueIterator TechIt = SubEntMat->getTechniqueIterator();
-
-					while(TechIt.hasMoreElements())
-					{
-						if (static_cast<Ogre::Technique*>(TechIt.peekNext())->getSchemeName() == "HydraxDepth")
-						{
-						    DepthTechniquePresent = true;
-						}
-
-						TechIt.moveNext();
-					}
-				}
-
-				if (DepthTechniquePresent)
-				{
-					mMaterials.push("_HydraxDepth_Technique_Present_");
-					DepthTechniquePresent = false;
-					continue;
-				}
-
-				mMaterials.push(CurrentEntity->getSubEntity(k)->getMaterialName());
-
-			    CurrentEntity->getSubEntity(k)->setMaterialName(mHydrax->getMaterialManager()->getMaterial(MaterialManager::MAT_DEPTH)->getName());
-			}
-
-            EntityIterator.moveNext();
-        }
-
 		if (Ogre::Math::Abs(mHydrax->getPosition().y - mHydrax->getCamera()->getDerivedPosition().y) > mHydrax->getPlanesError())
 		{
 			if (mHydrax->_isCurrentFrameUnderwater())
@@ -708,35 +660,6 @@ namespace Hydrax
     {
 		Hydrax *mHydrax = mRttManager->mHydrax;
 
-        Ogre::SceneManager::MovableObjectIterator EntityIterator =
-			mHydrax->getSceneManager()->getMovableObjectIterator("Entity");
-        Ogre::Entity* CurrentEntity;
-		unsigned int k;
-
-		Ogre::String Mat;
-
-        while (EntityIterator.hasMoreElements())
-        {
-			CurrentEntity = static_cast<Ogre::Entity*>(EntityIterator.peekNextValue());
-
-			for(k = 0; k < CurrentEntity->getNumSubEntities(); k++)
-			{
-				Mat = mMaterials.front();
-
-				if (Mat == "_HydraxDepth_Technique_Present_")
-				{
-					mMaterials.pop();
-					continue;
-				}
-
-			    CurrentEntity->getSubEntity(k)->setMaterialName(Mat);
-
-				mMaterials.pop();
-			}
-
-            EntityIterator.moveNext();
-        }
-
         mHydrax->getMesh()->getEntity()->setVisible(true);
 		mHydrax->getGodRaysManager()->setVisible(false);
 		mHydrax->getMesh()->getEntity()->setRenderQueueGroup(Ogre::RENDER_QUEUE_1);
@@ -765,54 +688,6 @@ namespace Hydrax
 
 		mHydrax->getMesh()->getEntity()->setVisible(false);
 
-        Ogre::SceneManager::MovableObjectIterator EntityIterator =
-			mHydrax->getSceneManager()->getMovableObjectIterator("Entity");
-        Ogre::Entity* CurrentEntity;
-		unsigned int k;
-
-		Ogre::MaterialPtr SubEntMat;
-		bool DepthTechniquePresent = false;
-
-        mMaterials.empty();
-
-        while (EntityIterator.hasMoreElements())
-        {
-            CurrentEntity = static_cast<Ogre::Entity*>(EntityIterator.peekNextValue());
-
-			for(k = 0; k < CurrentEntity->getNumSubEntities(); k++)
-			{
-				SubEntMat = Ogre::MaterialManager::getSingleton().getByName(CurrentEntity->getSubEntity(k)->getMaterialName(), HYDRAX_RESOURCE_GROUP);
-
-				if (!SubEntMat.isNull())
-				{
-					Ogre::Material::TechniqueIterator TechIt = SubEntMat->getTechniqueIterator();
-
-					while(TechIt.hasMoreElements())
-					{
-						if (static_cast<Ogre::Technique*>(TechIt.peekNext())->getSchemeName() == "HydraxDepth")
-						{
-						    DepthTechniquePresent = true;
-						}
-
-						TechIt.moveNext();
-					}
-				}
-
-				if (DepthTechniquePresent)
-				{
-					mMaterials.push("_HydraxDepth_Technique_Present_");
-					DepthTechniquePresent = false;
-					continue;
-				}
-
-				mMaterials.push(CurrentEntity->getSubEntity(k)->getMaterialName());
-
-			    CurrentEntity->getSubEntity(k)->setMaterialName(mHydrax->getMaterialManager()->getMaterial(MaterialManager::MAT_DEPTH)->getName());
-			}
-
-            EntityIterator.moveNext();
-        }
-
         mRttManager->mPlanes[RTT_DEPTH_REFLECTION]->getParentNode()->translate(0,-mHydrax->getPlanesError(),0);
 
         bool IsInUnderwaterError = false;
@@ -840,35 +715,6 @@ namespace Hydrax
 	void RttManager::CDepthReflectionListener::postRenderTargetUpdate(const Ogre::RenderTargetEvent& evt)
     {
 		Hydrax *mHydrax = mRttManager->mHydrax;
-
-        Ogre::SceneManager::MovableObjectIterator EntityIterator =
-			mHydrax->getSceneManager()->getMovableObjectIterator("Entity");
-        Ogre::Entity* CurrentEntity;
-		unsigned int k;
-
-		Ogre::String Mat;
-
-        while (EntityIterator.hasMoreElements())
-        {
-			CurrentEntity = static_cast<Ogre::Entity*>(EntityIterator.peekNextValue());
-
-			for(k = 0; k < CurrentEntity->getNumSubEntities(); k++)
-			{
-			    Mat = mMaterials.front();
-
-				if (Mat == "_HydraxDepth_Technique_Present_")
-				{
-					mMaterials.pop();
-					continue;
-				}
-
-			    CurrentEntity->getSubEntity(k)->setMaterialName(Mat);
-
-				mMaterials.pop();
-			}
-
-            EntityIterator.moveNext();
-        }
 
         mHydrax->getMesh()->getEntity()->setVisible(true);
 

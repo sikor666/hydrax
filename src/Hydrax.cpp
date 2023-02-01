@@ -826,11 +826,6 @@ namespace Hydrax
 		Ogre::TexturePtr tex;
 		if (isComponent(HYDRAX_COMPONENT_UNDERWATER_REFLECTIONS) || !_isCurrentFrameUnderwater())
 		{
-			/* Fix from http://www.ogre3d.org/addonforums/viewtopic.php?f=20&t=10925 
-			mRttManager->getTexture(RttManager::RTT_REFLECTION)->
-				 getBuffer()->getRenderTarget()->getViewport(0)->
-					 setBackgroundColour(WC);
-			*/
 			tex = mRttManager->getTexture(RttManager::RTT_REFLECTION);
 			if(!tex.isNull()) 
 			{
@@ -838,11 +833,7 @@ namespace Hydrax
 				tex.setNull();
 			}
 		}
-		/* Fix from http://www.ogre3d.org/addonforums/viewtopic.php?f=20&t=10925 
-	    mRttManager->getTexture(RttManager::RTT_REFRACTION)->
-			getBuffer()->getRenderTarget()->getViewport(0)->
-				 setBackgroundColour(WC);
-		*/
+
 		tex = mRttManager->getTexture(RttManager::RTT_REFRACTION);
         if(!tex.isNull()) 
 		{
@@ -864,20 +855,6 @@ namespace Hydrax
 		    mMaterialManager->setGpuProgramParameter(
 			    MaterialManager::GPUP_FRAGMENT, MaterialManager::MAT_UNDERWATER,
 			    "uWaterColor", WaterColor);
-
-			//mMaterialManager->getCompositor(MaterialManager::COMP_UNDERWATER)->
-			//	getTechnique(0)->getTargetPass(0)->getPass(0)->setClearColour(WC);
-
-            /* Active creation/destruction
-			if (getHeigth(mCamera->getDerivedPosition()) > mCamera->getDerivedPosition().y-1.25f)
-			{
-				if (mMaterialManager->isCompositorEnable(MaterialManager::COMP_UNDERWATER))
-				{
-					mMaterialManager->setCompositorEnable(MaterialManager::COMP_UNDERWATER, false);
-					mMaterialManager->setCompositorEnable(MaterialManager::COMP_UNDERWATER, true);
-				}
-			}
-			*/
 		}
     }
 

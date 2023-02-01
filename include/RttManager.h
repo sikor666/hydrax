@@ -129,15 +129,6 @@ namespace Hydrax
 		 */
 		void removeAll();
 
-		/** Get RTT texture name
-		    @param Rtt Rtt type
-		    @return Rtt texture name
-		 */
-		inline const Ogre::String& getRttName(RttType Rtt) const
-		{
-			return mRttOptions[static_cast<int>(Rtt)].Name;
-		}
-
 		/** Get Rtt texture
 		    @param Rtt Rtt type
 			@return Rtt texture
@@ -204,15 +195,6 @@ namespace Hydrax
 			}
 		}
 
-		/** Get number of channels
-		    @Rtt Rtt type
-			@return Number of channels
-		 */
-		inline const NumberOfChannels& getNumberOfChannels(const RttType& Rtt) const
-		{
-			return mRttOptions[Rtt].NumberOfChannels_;
-		}
-
 		/** Set bits per channel
 		    @Rtt Rtt type
 			@BPC Bits per channel
@@ -225,24 +207,6 @@ namespace Hydrax
 			{
 				initialize(Rtt);
 			}
-		}
-
-		/** Get bits per channels
-		    @Rtt Rtt type
-			@return Bits per channel
-		 */
-		inline const BitsPerChannel& getBitsPerChannel(const RttType& Rtt) const
-		{
-			return mRttOptions[Rtt].BitsPerChannel_;
-		}
-
-		/** Get Rtt options
-		    @Rtt Rtt type
-			@return RttOptions
-		 */
-		inline const RttOptions& getRttOptions(const RttType& Rtt) const
-		{
-			return mRttOptions[Rtt];
 		}
 
 		/** Set reflection displacement error

@@ -3058,7 +3058,6 @@ namespace Hydrax
                 GLSLTextUnit++;
             }
 		    DM_Technique0_Pass0->createTextureUnitState("HydraxDepthMap")->setTextureAddressingMode(Ogre::TextureUnitState::TAM_CLAMP);
-            Ogre::Viewport *Viewport = mHydrax->getCamera()->getViewport();
 		}
 
 		UnderwaterCompositorMaterial->setReceiveShadows(false);
@@ -3742,11 +3741,6 @@ namespace Hydrax
 		    VP_Parameters->
 			    setNamedConstant( "uCorner02",  mMaterialManager->mHydrax->getCamera()->getWorldSpaceCorners()[6] - mMaterialManager->mHydrax->getCamera()->getWorldSpaceCorners()[5]);
 		}
-
-        if (mMaterialManager->_isComponent(mMaterialManager->mComponents, HYDRAX_COMPONENT_DEPTH))
-        {
-            Ogre::Viewport *Viewport = mMaterialManager->mHydrax->getCamera()->getViewport();
-        }
 
 		if (mMaterialManager->mCompositorsNeedToBeReloaded[COMP_UNDERWATER])
 		{

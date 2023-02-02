@@ -136,17 +136,6 @@ public:
      */
     void update(const Ogre::Real &timeSinceLastFrame);
 
-    /** Save config
-        @param Data String reference
-     */
-    void saveCfg(Ogre::String &Data);
-
-    /** Load config
-        @param CgfFile Ogre::ConfigFile reference
-        @return True if is the correct noise config
-     */
-    bool loadCfg(Ogre::ConfigFile &CfgFile);
-
     /** Get the especified x/y noise value
         @param x X Coord
         @param y Y Coord

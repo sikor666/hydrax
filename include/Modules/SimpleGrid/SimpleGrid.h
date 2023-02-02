@@ -143,17 +143,6 @@ namespace Hydrax{ namespace Module
 		 */
 		void setOptions(const Options &Options);
 
-		/** Save config
-		    @param Data String reference 
-		 */
-		void saveCfg(Ogre::String &Data);
-
-		/** Load config
-		    @param CgfFile Ogre::ConfigFile reference 
-			@return True if is the correct module config
-		 */
-		bool loadCfg(Ogre::ConfigFile &CfgFile);
-
 		/** Get the current heigth at a especified world-space point
 		    @param Position X/Z World position
 			@return Heigth at the given position in y-World coordinates, if it's outside of the water return -1

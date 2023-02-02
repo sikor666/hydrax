@@ -76,22 +76,4 @@ namespace Hydrax{namespace Noise
 			g->remove();
 		}
 	}
-
-	void Noise::saveCfg(Ogre::String &Data)
-	{
-		Data += "#Noise options\n";
-		Data += "Noise="+mName+"\n\n";
-	}
-
-	bool Noise::loadCfg(Ogre::ConfigFile &CfgFile)
-	{
-		if (CfgFile.getSetting("Noise") == mName)
-		{
-		    HydraxLOG(mName + " options entry found.");
-			return true;
-		}
-
-        HydraxLOG("Error (Noise::loadCfg):\t" + mName + " options entry can not be found.");
-		return false;
-	}
 }}

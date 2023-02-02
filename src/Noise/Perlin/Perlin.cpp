@@ -332,38 +332,6 @@ namespace Hydrax{namespace Noise
 		return true;
 	}
 
-	void Perlin::saveCfg(Ogre::String &Data)
-	{
-		Noise::saveCfg(Data);
-
-		Data += CfgFileManager::_getCfgString("Perlin_Octaves", mOptions.Octaves);
-		Data += CfgFileManager::_getCfgString("Perlin_Scale", mOptions.Scale);
-		Data += CfgFileManager::_getCfgString("Perlin_Falloff", mOptions.Falloff);
-		Data += CfgFileManager::_getCfgString("Perlin_Animspeed", mOptions.Animspeed);
-		Data += CfgFileManager::_getCfgString("Perlin_Timemulti", mOptions.Timemulti);
-		Data += CfgFileManager::_getCfgString("Perlin_GPU_Strength", mOptions.GPU_Strength);
-		Data += CfgFileManager::_getCfgString("Perlin_GPU_LODParameters", mOptions.GPU_LODParameters); Data += "\n";
-	}
-
-	bool Perlin::loadCfg(Ogre::ConfigFile &CfgFile)
-	{
-		if (!Noise::loadCfg(CfgFile))
-		{
-			return false;
-		}
-
-		setOptions(
-			Options(CfgFileManager::_getIntValue(CfgFile,"Perlin_Octaves"),
-			        CfgFileManager::_getFloatValue(CfgFile,"Perlin_Scale"),
-					CfgFileManager::_getFloatValue(CfgFile,"Perlin_Falloff"),
-					CfgFileManager::_getFloatValue(CfgFile,"Perlin_Animspeed"),
-					CfgFileManager::_getFloatValue(CfgFile,"Perlin_Timemulti"),
-					CfgFileManager::_getFloatValue(CfgFile,"Perlin_GPU_Strength"),
-					CfgFileManager::_getVector3Value(CfgFile,"Perlin_GPU_LODParameters")));
-
-		return true;
-	}
-
 	void Perlin::update(const Ogre::Real &timeSinceLastFrame)
 	{
 		time += timeSinceLastFrame*mOptions.Animspeed;

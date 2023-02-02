@@ -134,32 +134,6 @@ bool Real::createGPUNormalMapResources(GPUNormalMapManager *g)
     return false;
 }
 
-void Real::saveCfg(Ogre::String &Data)
-{
-    mPerlinNoise->saveCfg(Data);
-}
-
-bool Real::loadCfg(Ogre::ConfigFile &CfgFile)
-{
-    if (!Noise::loadCfg(CfgFile))
-    {
-        return false;
-    }
-
-    HydraxLOG("\tReading options...");
-    mPerlinNoise->setOptions(
-        Perlin::Options(CfgFileManager::_getIntValue(CfgFile,"Perlin_Octaves"),
-                CfgFileManager::_getFloatValue(CfgFile,"Perlin_Scale"),
-                CfgFileManager::_getFloatValue(CfgFile,"Perlin_Falloff"),
-                CfgFileManager::_getFloatValue(CfgFile,"Perlin_Animspeed"),
-                CfgFileManager::_getFloatValue(CfgFile,"Perlin_Timemulti"),
-                CfgFileManager::_getFloatValue(CfgFile,"Perlin_GPU_Strength"),
-                CfgFileManager::_getVector3Value(CfgFile,"Perlin_GPU_LODParameters")));
-    HydraxLOG("\tOptions readed.");
-
-    return true;
-}
-
 void Real::update(const Ogre::Real &timeSinceLastFrame)
 {
     int i;

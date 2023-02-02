@@ -37,7 +37,6 @@ http://www.gnu.org/copyleft/lesser.txt.
 #include "GodRaysManager.h"
 #include "DecalsManager.h"
 #include "GPUNormalMapManager.h"
-#include "CfgFileManager.h"
 #include "Modules/Module.h"
 
 namespace Hydrax
@@ -113,29 +112,6 @@ namespace Hydrax
 		    @param q const Ogre::Quaternion&
 		*/
 		void rotate(const Ogre::Quaternion &q);
-
-		/** Save hydrax config to file
-		    @param File File name
-			@param Path File path
-			@return false if an error has been ocurred(Check the log file in this case).
-			@remarks If module isn't set, module/noise options won't be saved.
-		 */
-		inline const bool saveCfg(const Ogre::String &File, const Ogre::String& Path = "") const
-		{
-			return mCfgFileManager->save(File, Path);
-		}
-
-		/** Load config from file
-		    @param File File name
-			@return false if an error has been ocurred(Check the log file in this case).
-			@remarks The file must be registred in Hydrax resource group.
-			         If module isn't set, or module isn't the same from
-			         config file, module options won't be loaded.
-		 */
-		inline const bool loadCfg(const Ogre::String &File) const
-		{
-			return mCfgFileManager->load(File);
-		}
 
         /** Set clip planes error
             @param PlanesError Clip planes error
@@ -365,14 +341,6 @@ namespace Hydrax
 		inline GPUNormalMapManager* getGPUNormalMapManager()
 		{
 			return mGPUNormalMapManager;
-		}
-
-		/** Get Hydrax::CfgFileManager
-		    @return Hydrax::CfgFileManager pointer
-	     */
-		inline CfgFileManager* getCfgFileManager()
-		{
-			return mCfgFileManager;
 		}
 
 		/** Get our Hydrax::Module::Module
@@ -741,8 +709,6 @@ namespace Hydrax
 		DecalsManager *mDecalsManager;
 		/// Our Hydrax::GPUNormalMapManager pointer
 		GPUNormalMapManager *mGPUNormalMapManager;
-		/// Our Hydrax::CfgFileManager pointer
-		CfgFileManager *mCfgFileManager;
 		/// Our Hydrax::Module::Module pointer
 		Module::Module *mModule;
 

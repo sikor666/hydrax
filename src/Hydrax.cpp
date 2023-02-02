@@ -73,7 +73,6 @@ namespace Hydrax
 			, mGodRaysManager(new GodRaysManager(this))
 			, mDecalsManager(new DecalsManager(this))
 			, mGPUNormalMapManager(new GPUNormalMapManager(this))
-			, mCfgFileManager(new CfgFileManager(this))
 			, mModule(0)
             , mComponents(HYDRAX_COMPONENTS_NONE)
     {
@@ -95,7 +94,6 @@ namespace Hydrax
 		delete mDecalsManager;
 		delete mGodRaysManager;
 		delete mRttManager;
-		delete mCfgFileManager;
         delete mMesh;
 
         HydraxLOG("Hydrax object removed.");

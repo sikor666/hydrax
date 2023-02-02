@@ -387,38 +387,6 @@ namespace Hydrax{namespace Noise
 		PixelBuffer->unlock();
 	}
 
-	void FFT::saveCfg(Ogre::String &Data)
-	{
-		Noise::saveCfg(Data);
-
-		Data += CfgFileManager::_getCfgString("FFT_Resolution", mOptions.Resolution);
-		Data += CfgFileManager::_getCfgString("FFT_PhysycalResolution", mOptions.PhysicalResolution);
-		Data += CfgFileManager::_getCfgString("FFT_Scale", mOptions.Scale);
-		Data += CfgFileManager::_getCfgString("FFT_WindDirection", mOptions.WindDirection);
-		Data += CfgFileManager::_getCfgString("FFT_AnimationSpeed", mOptions.AnimationSpeed);
-		Data += CfgFileManager::_getCfgString("FFT_KwPower", mOptions.KwPower);
-		Data += CfgFileManager::_getCfgString("FFT_Amplitude", mOptions.Amplitude); Data += "\n";
-	}
-
-	bool FFT::loadCfg(Ogre::ConfigFile &CfgFile)
-	{
-		if (!Noise::loadCfg(CfgFile))
-		{
-			return false;
-		}
-
-		setOptions(
-			Options(CfgFileManager::_getIntValue(CfgFile,"FFT_Resolution"),
-			        CfgFileManager::_getFloatValue(CfgFile,"FFT_PhysycalResolution"),
-					CfgFileManager::_getFloatValue(CfgFile,"FFT_Scale"),
-					CfgFileManager::_getVector2Value(CfgFile,"FFT_WindDirection"),
-					CfgFileManager::_getFloatValue(CfgFile,"FFT_AnimationSpeed"),
-					CfgFileManager::_getFloatValue(CfgFile,"FFT_KwPower"),
-					CfgFileManager::_getFloatValue(CfgFile,"FFT_Amplitude")));
-
-		return true;
-	}
-
 	void FFT::update(const Ogre::Real &timeSinceLastFrame)
 	{
 		_calculeNoise(timeSinceLastFrame);

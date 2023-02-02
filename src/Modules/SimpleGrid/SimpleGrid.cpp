@@ -234,36 +234,6 @@ namespace Hydrax{namespace Module
 		}
 	}
 
-	void SimpleGrid::saveCfg(Ogre::String &Data)
-	{
-		Module::saveCfg(Data);
-
-		Data += CfgFileManager::_getCfgString("SG_Complexity", mOptions.Complexity);
-		Data += CfgFileManager::_getCfgString("SG_MeshSize", mOptions.MeshSize);
-		Data += CfgFileManager::_getCfgString("SG_Strength", mOptions.Strength);
-		Data += CfgFileManager::_getCfgString("SG_Smooth", mOptions.Smooth);
-		Data += CfgFileManager::_getCfgString("SG_ChoppyWaves", mOptions.ChoppyWaves);
-		Data += CfgFileManager::_getCfgString("SG_ChoppyStrength", mOptions.ChoppyStrength); Data += "\n";
-	}
-
-	bool SimpleGrid::loadCfg(Ogre::ConfigFile &CfgFile)
-	{
-		if (!Module::loadCfg(CfgFile))
-		{
-			return false;
-		}
-
-		setOptions(
-			Options(CfgFileManager::_getIntValue(CfgFile,   "SG_Complexity"),
-			        CfgFileManager::_getSizeValue(CfgFile,  "SG_MeshSize"),
-					CfgFileManager::_getFloatValue(CfgFile, "SG_Strength"),
-					CfgFileManager::_getBoolValue(CfgFile,  "PG_Smooth"),
-					CfgFileManager::_getBoolValue(CfgFile,  "PG_ChoppyWaves"),
-					CfgFileManager::_getFloatValue(CfgFile, "PG_ChoopyStrength")));
-
-		return true;
-	}
-
 	void SimpleGrid::update(const Ogre::Real &timeSinceLastFrame)
 	{
 		if (!isCreated())

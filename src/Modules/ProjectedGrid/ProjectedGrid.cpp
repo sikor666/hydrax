@@ -206,41 +206,6 @@ namespace Hydrax{namespace Module
 		mLastOrientation = Ogre::Quaternion();
 	}
 
-	void ProjectedGrid::saveCfg(Ogre::String &Data)
-	{
-		Module::saveCfg(Data);
-
-		Data += CfgFileManager::_getCfgString("PG_ChoopyStrength", mOptions.ChoppyStrength);
-		Data += CfgFileManager::_getCfgString("PG_ChoppyWaves", mOptions.ChoppyWaves);
-		Data += CfgFileManager::_getCfgString("PG_Complexity", mOptions.Complexity);
-		Data += CfgFileManager::_getCfgString("PG_Elevation", mOptions.Elevation);
-		Data += CfgFileManager::_getCfgString("PG_ForceRecalculateGeometry", mOptions.ForceRecalculateGeometry);
-		Data += CfgFileManager::_getCfgString("PG_Smooth", mOptions.Smooth);
-		Data += CfgFileManager::_getCfgString("PG_Strength", mOptions.Strength); Data += "\n";
-	}
-
-	bool ProjectedGrid::loadCfg(Ogre::ConfigFile &CfgFile)
-	{
-		if (!Module::loadCfg(CfgFile))
-		{
-			return false;
-		}
-
-        HydraxLOG("\tReading options...");
-		setOptions(
-			Options(CfgFileManager::_getIntValue(CfgFile,   "PG_Complexity"),
-			        CfgFileManager::_getFloatValue(CfgFile, "PG_Strength"),
-					CfgFileManager::_getFloatValue(CfgFile, "PG_Elevation"),
-					CfgFileManager::_getBoolValue(CfgFile,  "PG_Smooth"),
-					CfgFileManager::_getBoolValue(CfgFile,  "PG_ForceRecalculateGeometry"),
-					CfgFileManager::_getBoolValue(CfgFile,  "PG_ChoppyWaves"),
-					CfgFileManager::_getFloatValue(CfgFile, "PG_ChoopyStrength")));
-
-        HydraxLOG("\tOptions readed.");
-
-		return true;
-	}
-
 	void ProjectedGrid::update(const Ogre::Real &timeSinceLastFrame)
 	{
 		if (!isCreated())

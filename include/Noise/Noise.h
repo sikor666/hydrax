@@ -70,17 +70,6 @@ namespace Hydrax{ namespace Noise
 		 */
 		virtual void update(const Ogre::Real &timeSinceLastFrame) = 0;
 
-		/** Save config
-		    @param Data String reference 
-		 */
-		virtual void saveCfg(Ogre::String &Data);
-
-		/** Load config
-		    @param CgfFile Ogre::ConfigFile reference 
-			@return True if is the correct noise config
-		 */
-		virtual bool loadCfg(Ogre::ConfigFile &CfgFile);
-
 		/** Get noise name
 		    @return Noise name
 		 */

@@ -96,24 +96,6 @@ namespace Hydrax{namespace Module
 		mNoise->update(timeSinceLastFrame);
 	}
 
-	void Module::saveCfg(Ogre::String &Data)
-	{
-		Data += "#Module options\n";
-		Data += "Module="+mName+"\n\n";
-	}
-
-	bool Module::loadCfg(Ogre::ConfigFile &CfgFile)
-	{
-		if (CfgFile.getSetting("Module") == mName)
-		{
-		    HydraxLOG(mName + " options entry found.");
-			return true;
-		}
-
-        HydraxLOG("Error (Module::loadCfg):\t" + mName + " options entry can not be found.");
-		return false;
-	}
-
 	float Module::getHeigth(const Ogre::Vector2 &Position)
 	{
 		return -1;

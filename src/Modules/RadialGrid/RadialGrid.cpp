@@ -393,44 +393,6 @@ namespace Hydrax{namespace Module
 		}
 	}
 
-	void RadialGrid::saveCfg(Ogre::String &Data)
-	{
-		Module::saveCfg(Data);
-
-		Data += CfgFileManager::_getCfgString("RG_Steps", mOptions.Steps);
-		Data += CfgFileManager::_getCfgString("RG_Circles", mOptions.Circles);
-		Data += CfgFileManager::_getCfgString("RG_Radius", mOptions.Radius);
-		Data += CfgFileManager::_getCfgString("RG_Smooth", mOptions.Smooth);
-		Data += CfgFileManager::_getCfgString("RG_ChoppyWaves", mOptions.ChoppyWaves);
-		Data += CfgFileManager::_getCfgString("RG_ChoppyStrength", mOptions.ChoppyStrength);
-		Data += CfgFileManager::_getCfgString("RG_StepSizeCube", mOptions.StepSizeCube);
-		Data += CfgFileManager::_getCfgString("RG_StepSizeFive", mOptions.StepSizeFive);
-		Data += CfgFileManager::_getCfgString("RG_StepSizeLin", mOptions.StepSizeLin);
-		Data += CfgFileManager::_getCfgString("RG_Strength", mOptions.Strength);Data += "\n";
-	}
-
-	bool RadialGrid::loadCfg(Ogre::ConfigFile &CfgFile)
-	{
-		if (!Module::loadCfg(CfgFile))
-		{
-			return false;
-		}
-
-		setOptions(
-			Options(CfgFileManager::_getIntValue(CfgFile,   "RG_Steps"),
-			        CfgFileManager::_getIntValue(CfgFile,  "RG_Circles"),
-					CfgFileManager::_getFloatValue(CfgFile, "RG_Radius"),
-					CfgFileManager::_getBoolValue(CfgFile,  "RG_Smooth"),
-					CfgFileManager::_getBoolValue(CfgFile,  "RG_ChoppyWaves"),
-					CfgFileManager::_getFloatValue(CfgFile, "RG_ChoppyStrength"),
-					CfgFileManager::_getFloatValue(CfgFile, "RG_StepSizeCube"),
-					CfgFileManager::_getFloatValue(CfgFile, "RG_StepSizeFive"),
-					CfgFileManager::_getFloatValue(CfgFile, "RG_StepSizeLin"),
-					CfgFileManager::_getFloatValue(CfgFile, "RG_Strength")));
-
-		return true;
-	}
-
 	void RadialGrid::update(const Ogre::Real &timeSinceLastFrame)
 	{
 		if (!isCreated())

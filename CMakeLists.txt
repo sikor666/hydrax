@@ -40,7 +40,6 @@ link_directories(${OGRE_LIB_DIR})
 
 
 set(SOURCES_${PROJECT_NAME}_BASE
-    src/CfgFileManager.cpp
     src/DecalsManager.cpp
     src/Enums.cpp
     src/GodRaysManager.cpp
@@ -70,7 +69,6 @@ set(SOURCES_${PROJECT_NAME}_NOISE
 
 
 set(HEADERS_${PROJECT_NAME}
-    include/CfgFileManager.h
     include/DecalsManager.h
     include/Enums.h
     include/GodRaysManager.h

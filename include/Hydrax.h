@@ -593,21 +593,6 @@ namespace Hydrax
 
     private:
 
-        /** Device listener
-	     */
-	    class DllExport DeviceListener : public Ogre::RenderSystem::Listener
-	    {
-		public:
-			/// Hydrax manager pointer
-            Hydrax* mHydrax;
-
-			/** Event occurred
-			    @param eventName Name of the event
-				@param parameters Ogre::NameValuePairList pointer
-			 */
-			void eventOccurred(const Ogre::String& eventName, const Ogre::NameValuePairList *parameters);
-		};
-
         /** Update normal map textures
          */
         void _updateNM();
@@ -631,9 +616,6 @@ namespace Hydrax
         HydraxComponent mComponents;
 		/// Current shader mode
 		MaterialManager::ShaderMode mShaderMode;
-
-		/// Device listener
-		DeviceListener mDeviceListener;
 
 		/// Polygon mode (Solid, Wireframe, Points)
 		Ogre::PolygonMode mPolygonMode;

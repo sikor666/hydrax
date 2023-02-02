@@ -143,11 +143,6 @@ namespace Hydrax
 		}
         HydraxLOG("RTT manager initialized.");
 
-		HydraxLOG("Registring device restored listener...");
-		mDeviceListener.mHydrax = this;
-		Ogre::Root::getSingleton().getRenderSystem()->addListener(&mDeviceListener);
-		HydraxLOG("Device restored listener registred.");
-
 		HydraxLOG("Creating materials...");
 		mMaterialManager->createMaterials(mComponents, MaterialManager::Options(mShaderMode, mModule->getNormalMode()));
 		mMesh->setMaterialName(mMaterialManager->getMaterial(MaterialManager::MAT_WATER)->getName());
@@ -179,8 +174,6 @@ namespace Hydrax
 		{
 			return;
 		}
-
-		Ogre::Root::getSingleton().getRenderSystem()->removeListener(&mDeviceListener);
 
 		mMesh->remove();
 		mDecalsManager->removeAll();
@@ -245,17 +238,6 @@ namespace Hydrax
 			// Set hydrax mesh node visible
 			mMesh->getSceneNode()->setVisible(true);
 		}
-	}
-
-	void Hydrax::DeviceListener::eventOccurred(const Ogre::String& eventName, const Ogre::NameValuePairList *parameters)
-	{
-		// If needed...
-
-		if (eventName == "DeviceLost")
-		{}
-
-		if (eventName == "DeviceRestored")
-		{}
 	}
 
 	void Hydrax::setPolygonMode(const Ogre::PolygonMode& PM)
